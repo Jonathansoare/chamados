@@ -1,17 +1,14 @@
-const name = document.getElementById('name').value;
-const description = document.getElementById('description').value;
-const section = document.getElementById('section').value;
 
 async function obterSessionToken() {
     try {
       // Codifique o login e a senha em Base64
-      const base64Login = btoa('OpenTicket:mhex2024');  // Substitua por seu login:senha
+      const base64Login = btoa('OpenTicket:mhex2024');  // Login e senha do glpi
   
       const response = await fetch('http://localhost/glpi/apirest.php/initSession', {
         method: 'GET',
         headers: {
           'Authorization': `Basic ${base64Login}`,  // Autenticação básica com login e senha
-          'App-Token': 'hlbQDVuwbiUP0BTOqn4Sx6TaY9qTzLlyO9MBjNkt',  // Seu App-Token
+          'App-Token': 'hlbQDVuwbiUP0BTOqn4Sx6TaY9qTzLlyO9MBjNkt',  // App-Token
           'Content-Type': 'application/json'
         }
       });
@@ -19,7 +16,7 @@ async function obterSessionToken() {
       const result = await response.json();
       
       if (response.ok) {
-        console.log('Sessão iniciada com sucesso. Token de sessão:', result.session_token);
+        //console.log('Sessão iniciada com sucesso. Token de sessão:', result.session_token);
         return result.session_token;  // Retorna o token da sessão
       } else {
         console.error('Erro ao iniciar a sessão:', result);
@@ -35,27 +32,36 @@ async function obterSessionToken() {
 document.getElementById('ticketForm').addEventListener('submit', async function(event) {
     event.preventDefault(); // Evita o comportamento padrão do envio do formulário
 
-    // Captura os dados do formulário
-    const name = document.getElementById('name').value;
+    // Captura os valores dos inputs
+    const nameUser = document.getElementById('name').value;
     const description = document.getElementById('description').value;
     const section = document.getElementById('section').value;
+
+    // Obtem o botão e o spinner
+    const loadingButton = document.getElementById('loadingButton');
+    const spinner = document.getElementById('spinner');
+    
+    // Mostra o spinner e oculta o texto
+    loadingButton.classList.add('loading');
 
     // Obtem o session_token
     const session_token = await obterSessionToken();
     if (!session_token) {
       alert('Erro ao obter o token de sessão.');
+      // Oculta o spinner e mostra o texto novamente
+      loadingButton.classList.remove('loading');
       return;
     }
 
     // Constrói o corpo da requisição
     const ticketData = {
       input: {
-        name: `${name} - ${section}`,
+        name: `${nameUser} - ${section}`,
         content: description,
         requesttypes_id: 1,   // Tipo de incidente
         users_id_recipient: 1, // Substitua pelo ID do solicitante
         status: 1, // Status inicial do chamado
-        _sections_id: section
+        _sections_id: section  // Certifique-se de que esta chave esteja correta no seu GLPI
       }
     };
 
@@ -83,5 +89,8 @@ document.getElementById('ticketForm').addEventListener('submit', async function(
     } catch (error) {
       console.error('Erro na requisição:', error);
       alert('Erro de conexão com o servidor.');
+    } finally {
+      // Oculta o spinner e mostra o texto novamente após a requisição
+      loadingButton.classList.remove('loading');
     }
-  });
+});
