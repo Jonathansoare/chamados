@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'RobotoMono';
 }
 
 html, body {
@@ -9,7 +12,7 @@ html, body {
 }
 
 body {
-  background-image: url('assets/image/Forte_de_Copacabana_panorama.jpg');
+  background-image: url('../assets/image/Forte_de_Copacabana_panorama.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -28,7 +31,7 @@ body {
   width: 40%;
   height: 80%;
   border-radius: 20px;
-  background-color: rgba(250, 250, 250, 0.8); /* Sobreposição de cor */
+  background-color: rgba(250, 250, 250, 0.6); /* Sobreposição de cor */
   z-index: 1; /* Garante que o conteúdo esteja acima */
 }
 
@@ -37,6 +40,7 @@ body {
   font-size: 18px;
   margin-top: 20px;
   text-align: center;
+  font-family: "RobotoMonoLigth"
 }
 
 form {
@@ -77,10 +81,11 @@ form {
   font-size: 16px;
 }
 
-.content-input text {
+.content-input label {
   color: black;
-  font-size: 22px;
+  font-size: 17px;
   text-transform: uppercase;
+  font-family: "RobotoMonoBold";
 }
 
 .content-button {
@@ -101,8 +106,6 @@ form {
   border-radius: 10px;
   outline: none;
   background-color: green;
-
-  /* Flexbox para centralizar conteúdo */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -140,4 +143,8 @@ form {
 
 .btn.loading .btn-text {
   display: none; /* Oculta o texto */
+}
+
+.btn-text {
+  font-family: "RobotoMonoBold";
 }

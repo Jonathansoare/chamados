@@ -36,6 +36,7 @@ document.getElementById('ticketForm').addEventListener('submit', async function(
     const nameUser = document.getElementById('name').value;
     const description = document.getElementById('description').value;
     const section = document.getElementById('section').value;
+    const nameMachine = document.getElementById('nameMachine').value;
 
     // Obtem o botão e o spinner
     const loadingButton = document.getElementById('loadingButton');
@@ -57,10 +58,9 @@ document.getElementById('ticketForm').addEventListener('submit', async function(
     const ticketData = {
       input: {
         name: `${nameUser} - ${section}`,
-        content: description,
+        content: `${description} - ${nameMachine}`,
         requesttypes_id: 1,   // Tipo de incidente
         users_id_recipient: 1, // Substitua pelo ID do solicitante
-        status: 1, // Status inicial do chamado
         _sections_id: section  // Certifique-se de que esta chave esteja correta no seu GLPI
       }
     };
