@@ -10,26 +10,26 @@
 <body>
   <div class="main-content">
     <h1>BEM VINDO AO SISTEMA DE ABERTURA DE CHAMADOS DO MHEX/FC</h1>
-    <form id="ticketForm">
+    <form id="ticketForm" class="ticketForm" novalidate>
 
       <div class="content-input">
         <label for="name">Nome</label>
-        <input type="text" id="name" required>
+        <input type="text" id="name" required class="input-content">
       </div>
 
       <div class="content-input">
         <label for="name">Nome da maquina</label>
-        <input type="text" id="nameMachine" required>
+        <input type="text" id="nameMachine" class="input-content">
       </div>
 
       <div class="content-input">
         <label for="description">Descrição do problema</label>
-        <input type="text" id="description" required>
+        <input type="text" id="description" required class="input-content">
       </div>
 
       <div class="content-input">
         <label for="section">Seção</label>
-        <select id="section" name="section">
+        <select id="section" name="section" class="input-content">
           <option value="Selecionar">Selecionar</option>
           <option value="D.A">D.A</option>
           <option value="SIS">SIS</option>
@@ -52,13 +52,29 @@
         </select>
       </div>
 
+      <div class="msg-erro" id="msgErro">Preencha todos os campos</div>
+
       <div class="content-button">
         <button type="submit" id="loadingButton" class="btn">
           <span class="spinner" id="spinner"></span>
           <span class="btn-text">Abrir chamado</span>
         </button>
       </div>
+
     </form>
+
+    <div class="popup-wrapper popup-wrapper-logount">
+      <div class="popup">
+        <div class="popup-close">X</div>
+        <div class="popup-content">
+          <h2 class="popup-content-text">Chamado feito com sucesso!</h2>
+          <div class="popup-buttons">
+            <button id="btn-popup-sim" class="btnPopupSim">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
   <script src="/js/scripts.js"></script>
 </body>
